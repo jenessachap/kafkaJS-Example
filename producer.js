@@ -5,7 +5,7 @@ const trucks = []
 
 try {
     // read contents of the file
-    const data = fs.readFileSync('truck_engine_sensors.json', 'UTF-8');
+    const data = fs.readFileSync('kafka_socks_downloads.json', 'UTF-8');
     // split the contents by new line
     const lines = data.split(/\r?\n/);
     // print all lines
@@ -38,6 +38,7 @@ const produce = async () => {
                 topic : process.env.TOPIC,
                 messages : [
                     {
+                        // groupId:
                         key : String(idx),
                         // value : String(trucks[idx].engine_temperature)
                         value: String(trucks[idx])
@@ -59,8 +60,9 @@ produce().catch(error => {
     process.exit(1);
 })
 
+/*
 const consumer = kafka.consumer({
-    groupId: 'truck-group'
+    groupId: 'downloads'
   })
   
   const consume = async () => {
@@ -94,3 +96,4 @@ const consumer = kafka.consumer({
     }
     process.exit(1)
   })
+  */
